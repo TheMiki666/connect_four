@@ -117,7 +117,7 @@ describe Board do
     end
   end
   describe "#find_winner" do
-    xit "Finds a winner in a column" do
+    it "Finds a winner in a column" do
       test_board.add_chip(4,1)
       test_board.add_chip(4,2)
       test_board.add_chip(4,2)
@@ -126,7 +126,7 @@ describe Board do
       test_board.add_chip(4,1)
       expect(test_board.find_winner).to eq("2C4")
     end
-    xit "Finds a winner in a row" do
+    it "Finds a winner in a row" do
       test_board.add_chip(2,1)
       test_board.add_chip(3,2)
       test_board.add_chip(4,2)
@@ -137,7 +137,7 @@ describe Board do
       test_board.add_chip(5,1)
       expect(test_board.find_winner).to eq("1R2")
     end
-    xit "Finds a winner in top-left to right-down diagonal" do
+    it "Finds a winner in top-left to right-down diagonal" do
       test_board.add_chip(2,1)
       test_board.add_chip(3,1)
       test_board.add_chip(4,1)
@@ -150,34 +150,31 @@ describe Board do
       test_board.add_chip(5,2)
       expect(test_board.find_winner).to eq("2DL24")
     end
-    xit "Finds a winner in top-right to left-down diagonal" do
+    it "Finds a winner in top-right to left-down diagonal" do
       test_board.add_chip(7,1)
       test_board.add_chip(6,1)
       test_board.add_chip(5,1)
-      test_board.add_chip(4,2)
+      test_board.add_chip(7,1)
+      test_board.add_chip(6,1)
+      test_board.add_chip(7,1)
       test_board.add_chip(7,2)
       test_board.add_chip(6,2)
-      test_board.add_chip(5,1)
-      test_board.add_chip(7,2)
-      test_board.add_chip(6,1)
-      test_board.add_chip(7,1)
-      test_board.add_chip(7,1)
-      test_board.add_chip(6,1)
-      test_board.add_chip(5,1)
-      test_board.add_chip(4,1)
-      expect(test_board.find_winner).to eq("1DR75")
+      test_board.add_chip(5,2)
+      test_board.add_chip(4,2)
+      expect(test_board.find_winner).to eq("2DR41")
     end
-    xit "Does not find any winner" do
-      (1..3).each do |col|
-        (1..3).times {test_board.add_chip(col,1)}
-        (4..6).times {test_board.add_chip(col,2)}
+    it "Does not find any winner" do
+      3.times do
+        (1..2).each do |chip|
+          (1..3).each do |col|
+            test_board.add_chip(col,chip)
+          end
+          test_board.add_chip(4,chip==1?2:1)
+          (5..7).each do |col|
+            test_board.add_chip(col,chip)
+          end
+        end
       end
-      (4..6).each do |col|
-        (1..3).times {test_board.add_chip(col,2)}
-        (4..6).times {test_board.add_chip(col,1)}
-      end
-      (1..3).times {test_board.add_chip(7,1)}
-      (1..3).times {test_board.add_chip(7,2)}
       expect(test_board.find_winner).to eq(0)
     end
   end

@@ -1,7 +1,9 @@
 class Column
   MAX_HEIGTH = 6
 
+  attr_reader :max_height
   def initialize
+    @max_height = MAX_HEIGTH
     clear
   end
 
