@@ -1,4 +1,5 @@
 require_relative "column"
+require "colorize"
 
 class Board
   MAX_WIDTH = 7
@@ -56,9 +57,9 @@ class Board
         when 0
           print " "
         when 1
-          print "X"
+          print "X".colorize(:red)
         when 2
-          print "O"
+          print "O".colorize(:green)
         end
         print "|"
       end
